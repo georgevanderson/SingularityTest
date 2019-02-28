@@ -3,6 +3,10 @@ From: centos:7
 %post
     . /.singularity.d/env/10-docker.sh
 
+
+%setup
+	mkdir -p inputs
+
 # Mellanox OFED version 3.4-1.0.0.0
 %post
     yum install -y \
@@ -68,11 +72,7 @@ From: centos:7
 
 %post
     cd /
-    git clone --depth=1 https://github.com/USCCACS/RXMD.git RXMD && cd RXMD
-    mv config/make_example.inc ./ && mv make_example.inc make.inc
-	make -C init/
-	make -C src/
+    git clone --depth=1 https://github.com/georgevanderson/RXMD.git RXMD && cd RXMD
+	make all
 
-%setup
-        mkdir -p input
 
